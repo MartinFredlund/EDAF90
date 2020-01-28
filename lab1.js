@@ -94,22 +94,23 @@ class ExtraGreenSalad extends Salad {
 
 class GourmetSalad extends Salad {
     addFoundation(foundation, amount) {
-        foundation.amount = amount;
+        //foundation.amount = amount;
         this.foundations.push(foundation); 
     }
     addProtein(protein, amount) {
-        protein.amount = amount;
+        //protein.amount = amount;
         this.proteins.push(protein); 
     }
     addExtra(extra, amount) {
-        extra.amount = amount;
+        //extra.amount = amount;
         this.extras.push(extra); 
     }
     addDressing(dressing, amount) {
-        dressing.amount = amount;
+        //dressing.amount = amount;
         this.dressings.push(dressing); 
     }
 
+    /*
     get price() {
         const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
@@ -120,7 +121,7 @@ class GourmetSalad extends Salad {
        
         return prices.reduce(reducer);
     }
-
+    */
 }
 
 let myCesarSalad = new Salad();
@@ -155,7 +156,7 @@ console.log(myGreenSalad);
 console.log('Price: ' + myGreenSalad.price + '\n\n');
 
 console.log(myGourmetSalad);
-console.log('Price: ' + myGourmetSalad.price);
+//console.log('Price: ' + myGourmetSalad.price);
 
 
 
