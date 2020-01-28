@@ -2,48 +2,30 @@
 const imported = require("./inventory.js");
 //console.log(imported.inventory['Sallad']);
 
-let foundations = [];
-for(let x in imported.inventory) {
-    if(imported.inventory[x].foundation === true) {
-        foundations.push(x);
-    }
-}
-console.log('Foundations: ' + foundations.join(', ') + '\n');
+let foundations = Object.keys(imported.inventory).filter(i => imported.inventory[i].foundation === true);
+console.log('Foundation: ' + foundations + '\n');
 
-let proteins = [];
-for(let x in imported.inventory) {
-    if(imported.inventory[x].protein === true) {
-        proteins.push(x);
-    }
-}
-console.log('Proteins: ' + proteins.join(', ') + '\n');
+let proteins = Object.keys(imported.inventory).filter(i => imported.inventory[i].protein === true);
+console.log('Proteins: ' + proteins + '\n');
 
-let extras = [];
-for(let y in imported.inventory) {
-    if(imported.inventory[y].extra === true) {
-        extras.push(y);
-    }
-}
-console.log('Extras: ' + extras.join(', ') + '\n');
+let extras = Object.keys(imported.inventory).filter(i => imported.inventory[i].extra === true);
+console.log('Extras: ' + extras + '\n');
 
-let dressings = [];
-for(let z in imported.inventory) {
-    if(imported.inventory[z].dressing === true) {
-        dressings.push(z);
-    }
-}
-console.log('Dressings: ' + dressings.join(', '));
+let dressings = Object.keys(imported.inventory).filter(i => imported.inventory[i].dressing === true);
+console.log('Dressings: ' + dressings + '\n');
+
 
 class Salad {
     constructor() {
-      this.foundation;
+      this.foundations = [];
       this.proteins = [];
       this.extras = [];
-      this.dressing;
+      this.dressings = [];
+      //this.ingredients = [];
     }
 
     addFoundation(foundation) {
-        this.foundation = foundation; 
+        this.foundations.push(foundation); 
     }
     addProtein(protein) {
         this.proteins.push(protein); 
@@ -52,30 +34,64 @@ class Salad {
         this.extras.push(extra); 
     }
     addDressing(dressing) {
-        this.dressing = dressing; 
+        this.dressings.push(dressing); 
     }
 
-    removeIngredient(ingredient) {
-        console.log(ingredient);
-        if(ingredient.foundation === true) {
-            console.log(ingredient);
-            this.foundation = null;
+    removeFoundation(foundation) {
+        for(let i = 0; i < foundations.length; i++) {
+            if(protein === this.foundations[i]) {
+                this.foundations.splice(this.foundations.indexOf(foundation), 1);
+            }
         }
-        if(ingredient.protein === true) {
+    }
 
+    removeProtein(protein) {
+        for(let i = 0; i < proteins.length; i++) {
+            if(protein === this.proteins[i]) {
+                this.proteins.splice(this.proteins.indexOf(protein), 1);
+            }
         }
+    }
+
+    removeExtra(extra) {
+        for(let i = 0; i < extras.length; i++) {
+            if(extra === this.extras[i]) {
+                this.extras.splice(this.extras.indexOf(extra), 1);
+            }
+        }
+    }
+
+    removeDressing(dressing) {
+        for(let i = 0; i < dressings.length; i++) {
+            if(protein === this.dressings[i]) {
+                this.dressings.splice(this.dressings.indexOf(dressing), 1);
+            }
+        }
+    }
+
+    get price() {
+        const reducer = (accumulator, currentValue) => accumulator + currentValue;
+        let newArray = this.extras.concat(this.dressings, this.proteins, this.foundations);
+        let prices = newArray.map(i => imported.inventory[i].price);
+       
+        return prices.reduce(reducer);
     }
     
 }
 
-let newSalad = new Salad();
-newSalad.addFoundation('Pasta');
-newSalad.addProtein('Norsk fjordlax');
-newSalad.addProtein('Kycklingfilé');
-newSalad.addDressing('Caesardressing');
+let myCesarSalad = new Salad();
+myCesarSalad.addFoundation(foundations[0]);
+myCesarSalad.addProtein(proteins[0]);
+myCesarSalad.addProtein(proteins[1]);
+myCesarSalad.addDressing(dressings[0]);
+myCesarSalad.addExtra(extras[0]);
 
 
-console.log(newSalad);
+//myCesarSalad.removeFoundation(foundations[0]);
+//myCesarSalad.removeProtein(proteins[1]);
 
-newSalad.removeIngredient('Pasta');
+
+console.log(myCesarSalad);
+console.log('Price: ' + myCesarSalad.price);
+
 
