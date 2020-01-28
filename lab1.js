@@ -79,6 +79,50 @@ class Salad {
     
 }
 
+class ExtraGreenSalad extends Salad {
+    get price() {
+        const reducer = (accumulator, currentValue) => accumulator + currentValue;
+        
+        let extrasPrices = this.extras.map((i => imported.inventory[i].price*0.5));
+        let newArray = this.dressings.concat(this.proteins, this.foundations);
+        let otherPrices = newArray.map(i => imported.inventory[i].price);
+        let prices = extrasPrices.concat(otherPrices);
+       
+        return prices.reduce(reducer);
+    }
+}
+
+class GourmetSalad extends Salad {
+    addFoundation(foundation, amount) {
+        foundation.amount = amount;
+        this.foundations.push(foundation); 
+    }
+    addProtein(protein, amount) {
+        protein.amount = amount;
+        this.proteins.push(protein); 
+    }
+    addExtra(extra, amount) {
+        extra.amount = amount;
+        this.extras.push(extra); 
+    }
+    addDressing(dressing, amount) {
+        dressing.amount = amount;
+        this.dressings.push(dressing); 
+    }
+
+    get price() {
+        const reducer = (accumulator, currentValue) => accumulator + currentValue;
+
+        let newArray = this.extras.concat(this.dressings, this.proteins, this.foundations);
+
+        // kanske inte fungerar pga immutability på imported objets?
+        let specialPrices = this.newArray.map((i => imported.inventory[i].price*(imported.inventory[i].amount))); 
+       
+        return prices.reduce(reducer);
+    }
+
+}
+
 let myCesarSalad = new Salad();
 myCesarSalad.addFoundation(foundations[0]);
 myCesarSalad.addProtein(proteins[0]);
@@ -86,12 +130,34 @@ myCesarSalad.addProtein(proteins[1]);
 myCesarSalad.addDressing(dressings[0]);
 myCesarSalad.addExtra(extras[0]);
 
+let myGreenSalad = new ExtraGreenSalad();
+myGreenSalad.addFoundation(foundations[0]);
+myGreenSalad.addProtein(proteins[0]);
+myGreenSalad.addProtein(proteins[1]);
+myGreenSalad.addDressing(dressings[0]);
+myGreenSalad.addExtra(extras[0]);
+
+let myGourmetSalad = new GourmetSalad();
+myGourmetSalad.addFoundation(foundations[0], 1.3);
+myGourmetSalad.addProtein(proteins[0], 1.0);
+myGourmetSalad.addProtein(proteins[1], 1.0);
+myGourmetSalad.addDressing(dressings[0], 1.0);
+myGourmetSalad.addExtra(extras[0], 1.0);
 
 //myCesarSalad.removeFoundation(foundations[0]);
 //myCesarSalad.removeProtein(proteins[1]);
 
 
 console.log(myCesarSalad);
-console.log('Price: ' + myCesarSalad.price);
+console.log('Price: ' + myCesarSalad.price + '\n\n');
+
+console.log(myGreenSalad);
+console.log('Price: ' + myGreenSalad.price + '\n\n');
+
+console.log(myGourmetSalad);
+console.log('Price: ' + myGourmetSalad.price);
+
+
+
 
 
