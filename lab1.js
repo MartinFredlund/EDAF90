@@ -1,4 +1,4 @@
-'use strict';
+    'use strict';
 const imported = require("./inventory.js");
 //console.log(imported.inventory['Sallad']);
 
@@ -63,7 +63,7 @@ class Salad {
 
     removeDressing(dressing) {
         for(let i = 0; i < dressings.length; i++) {
-            if(protein === this.dressings[i]) {
+            if(dressing === this.dressings[i]) {
                 this.dressings.splice(this.dressings.indexOf(dressing), 1);
             }
         }
@@ -93,8 +93,12 @@ class ExtraGreenSalad extends Salad {
 
 class GourmetSalad extends Salad {
     addFoundation(foundation, amount) {
-        //foundation.amount = amount;
-        this.foundations.push(foundation); 
+        let foundationSize = {size: amount};
+        let test = {...imported.inventory[foundation]};
+        test.size = amount;
+       // foundations.push(newFoundation)
+        this.foundations.push(test);
+        console.log(test); 
     }
     addProtein(protein, amount) {
         //protein.amount = amount;
