@@ -82,11 +82,10 @@ class Salad {
 class ExtraGreenSalad extends Salad {
     get price() {
         const reducer = (accumulator, currentValue) => accumulator + currentValue;
-        
-        let extrasPrices = this.extras.map((i => imported.inventory[i].price*0.5));
-        let newArray = this.dressings.concat(this.proteins, this.foundations);
-        let otherPrices = newArray.map(i => imported.inventory[i].price);
-        let prices = extrasPrices.concat(otherPrices);
+        let newArray = this.extras.concat(this.proteins, this.dressings);
+        let newPrice = newArray.map((i => imported.inventory[i].price*0.5));
+        let increaseSize = this.foundations.map((i => imported.inventory[i].price*1.3));
+        let prices = newPrice.concat(increaseSize);
        
         return prices.reduce(reducer);
     }
