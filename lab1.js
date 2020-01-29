@@ -93,38 +93,39 @@ class ExtraGreenSalad extends Salad {
 
 class GourmetSalad extends Salad {
     addFoundation(foundation, amount) {
-        let foundationSize = {size: amount};
-        let test = {...imported.inventory[foundation]};
-        test.size = amount;
-       // foundations.push(newFoundation)
-        this.foundations.push(test);
-        console.log(test); 
+        let addFoundation = {...imported.inventory[foundation]};
+        addFoundation.size = amount;
+        this.foundations.push(addFoundation);
+         
     }
     addProtein(protein, amount) {
-        //protein.amount = amount;
-        this.proteins.push(protein); 
+        let addProtein = {...imported.inventory[protein]};
+        addProtein.size = amount;
+        this.proteins.push(addProtein); 
     }
     addExtra(extra, amount) {
-        //extra.amount = amount;
-        this.extras.push(extra); 
+        let addExtra = {...imported.inventory[extra]};
+        addExtra.size = amount;
+        this.extras.push(addExtra); 
     }
     addDressing(dressing, amount) {
-        //dressing.amount = amount;
-        this.dressings.push(dressing); 
+        let addDressing = {...imported.inventory[dressing]};
+        addDressing.size = amount;
+        this.dressings.push(addDressing); 
     }
 
-    /*
+    
     get price() {
         const reducer = (accumulator, currentValue) => accumulator + currentValue;
-
+        let temp = [];
         let newArray = this.extras.concat(this.dressings, this.proteins, this.foundations);
-
         // kanske inte fungerar pga immutability på imported objets?
-        let specialPrices = this.newArray.map((i => imported.inventory[i].price*(imported.inventory[i].amount))); 
-       
-        return prices.reduce(reducer);
+        newArray.forEach(function(item){
+            temp.push(item.price * item.size);
+        })
+        return temp.reduce(reducer);
     }
-    */
+    
 }
 
 let myCesarSalad = new Salad();
@@ -144,7 +145,7 @@ myGreenSalad.addExtra(extras[0]);
 let myGourmetSalad = new GourmetSalad();
 myGourmetSalad.addFoundation(foundations[0], 1.3);
 myGourmetSalad.addProtein(proteins[0], 1.0);
-myGourmetSalad.addProtein(proteins[1], 1.0);
+myGourmetSalad.addProtein(proteins[1], 0.5);
 myGourmetSalad.addDressing(dressings[0], 1.0);
 myGourmetSalad.addExtra(extras[0], 1.0);
 
@@ -159,7 +160,7 @@ console.log(myGreenSalad);
 console.log('Price: ' + myGreenSalad.price + '\n\n');
 
 console.log(myGourmetSalad);
-//console.log('Price: ' + myGourmetSalad.price);
+console.log('Price: ' + myGourmetSalad.price);
 
 
 
