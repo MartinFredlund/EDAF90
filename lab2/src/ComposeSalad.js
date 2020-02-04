@@ -9,11 +9,15 @@ class ComposeSalad extends React.Component {
           extra: 'Avokado',
           dressing: 'Ceasardressing'
         };
-        this.stateProtien()
-        this.handleChange = this.handleChange.bind(this);
+
+        this.handleChange = this.handleInputChange.bind(this);
     }
     handleInputChange(event){
         const target = target.event;
+        const value = target.value;
+        this.setState({
+            [target.name]: value
+        });
     }
     handleSubmit(event) {
     alert('value: ' + this.stateFoundation.value);
@@ -35,18 +39,42 @@ class ComposeSalad extends React.Component {
     return (
      <form onSubmit={this.handleSubmit}>
          <label>
-             Foundation:
-             <select value= {this.state.value} onChange={this.handleChange}>
-                <option value="Sallad">Sallad</option>
-                <option value="Pasta">Pasta</option>
-                <option value="Sallad + Pasta">Sallad och Pasta</option>
-                <option value="Sallad + Matvete">Sallad och Matvete</option>
-                </select>
+             <h4>Välj bas</h4>
+             <select value= {this.state.foundation.value} onChange={this.handleInputChange}>
+                {foundations.map(name => (
+                <option key={name}>{name}</option>
+                ))}
+             </select>
          </label>
-         <label>
-             Protien: 
+         <div>
+          <label>
+             Välj protien  
+                {protiens.map(name => (
+                <div>
+                    <input id={name} name={name} type="checkbox" onChange={this.handleInputChange}/>
+                        <label for={name}>
+                            {name}
+                        </label>
+                </div>
+                ))}
 
-         </label>
+               {/*   <input name="kycklingfile" type="checkbox" value={this.state.protien} onChange={this.handleInputChange}/>  
+                 <label>
+                 Kycklingfile 
+                
+                </label>   */}
+             
+             {/* <div>
+                 <label>
+                Rökt kalkonfile: 
+                <input name="rökt kalkonfile" type="checkbox" value={this.state.protien} onChange={this.handleInputChange}/>   
+                </label> 
+             </div> 
+           */}
+          </label>     
+        </div>
+         
+         
          <input type="submit" value="Submit"/>
      </form>
 
