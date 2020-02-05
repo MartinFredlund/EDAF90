@@ -48,9 +48,9 @@ class ComposeSalad extends React.Component {
          <label>
              <h4>Välj bas</h4>
              <select value= {this.state.foundation.value} onChange={this.handleInputChangeFoundation}>
-                {foundations.map(name => (
-                <option key={name}>{name}</option>
-                ))}
+                {/* {foundations.map(name => (
+                <option key={name}>{name} + {this.props.inventory[name].price}</option>
+                ))} */}
              </select>
          </label>
          <div> 
@@ -59,9 +59,7 @@ class ComposeSalad extends React.Component {
                 {protiens.map(name => (
                 <div> 
                     <input  type="checkbox" id={name} name={name} value={name} onChange={this.handleInputChange}/>
-                        <label htmlFor={name}>
-                            {name}
-                        </label>
+                        <label htmlFor={name}>{name} + {this.props.inventory[name].price}</label>
                 </div>
                 ))}
           </label>
@@ -71,9 +69,7 @@ class ComposeSalad extends React.Component {
               {extras.map(name => (
                 <div>
                 <input  type="checkbox" id={name} name={name} value={name} onChange={this.handleInputChange}/>
-                    <label htmlFor={name}>
-                         {name}
-                    </label>
+                    <label htmlFor={name}>{name} + {this.props.inventory[name].price}</label>
             </div>
               ))}
           </label>
@@ -83,7 +79,7 @@ class ComposeSalad extends React.Component {
              <h4>Välj dressing</h4>
              <select value= {this.state.foundation.value} onChange={this.handleInputChange}>
                 {dressings.map(name => (
-                <option key={name}>{name}</option>
+                <option key={name}>{name} + {this.props.inventory[name].price}</option>
                 ))}
              </select>
          </label>
