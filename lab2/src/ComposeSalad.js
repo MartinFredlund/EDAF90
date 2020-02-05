@@ -4,19 +4,19 @@ class ComposeSalad extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-          foundation: 'Sallad',
-          protien: 'Kyckling',
-          extra: 'Avokado',
-          dressing: 'Ceasardressing'
+          foundation: '',
+          protien: [],
+          extra: [],
+          dressing: ''
         };
 
-        this.handleChange = this.handleInputChange.bind(this);
+        this.handleChange = this.handleInputChangeFoundation.bind(this);
     }
-    handleInputChange(event){
+    handleInputChangeFoundation(event){
         const target = target.event;
         const value = target.value;
         this.setState({
-            [target.name]: value
+            foundation: value
         });
     }
     handleSubmit(event) {
@@ -25,8 +25,9 @@ class ComposeSalad extends React.Component {
     }
 
   render() {
+    console.log(this.state);
     const inventory = this.props.inventory;
-    // test for correct ussage, the parent must send this datastructure
+    // test for correct ussage, <the parent must send this datastructure
     if (!inventory) {
       alert("inventory is undefined in ComposeSalad");
     }
@@ -34,47 +35,60 @@ class ComposeSalad extends React.Component {
       name => inventory[name].foundation
     );
     let protiens = Object.keys(inventory).filter(
-        name => inventory[name].protien
-    );
+        name => inventory[name].protein
+        );
+    let extras = Object.keys(inventory).filter(
+        name => inventory[name].extra
+        );
+    let dressings = Object.keys(inventory).filter(
+        name => inventory[name].dressing
+        );
     return (
      <form onSubmit={this.handleSubmit}>
          <label>
              <h4>Välj bas</h4>
-             <select value= {this.state.foundation.value} onChange={this.handleInputChange}>
+             <select value= {this.state.foundation.value} onChange={this.handleInputChangeFoundation}>
                 {foundations.map(name => (
                 <option key={name}>{name}</option>
                 ))}
              </select>
          </label>
-         <div>
+         <div> 
           <label>
-             Välj protien  
+             <h4>Välj protien</h4>  
                 {protiens.map(name => (
-                <div>
-                    <input id={name} name={name} type="checkbox" onChange={this.handleInputChange}/>
-                        <label for={name}>
+                <div> 
+                    <input  type="checkbox" id={name} name={name} value={name} onChange={this.handleInputChange}/>
+                        <label htmlFor={name}>
                             {name}
                         </label>
                 </div>
                 ))}
-
-               {/*   <input name="kycklingfile" type="checkbox" value={this.state.protien} onChange={this.handleInputChange}/>  
-                 <label>
-                 Kycklingfile 
-                
-                </label>   */}
-             
-             {/* <div>
-                 <label>
-                Rökt kalkonfile: 
-                <input name="rökt kalkonfile" type="checkbox" value={this.state.protien} onChange={this.handleInputChange}/>   
-                </label> 
-             </div> 
-           */}
-          </label>     
+          </label>
+        <div>
+          <label>
+            <h4>Välj extra</h4>
+              {extras.map(name => (
+                <div>
+                <input  type="checkbox" id={name} name={name} value={name} onChange={this.handleInputChange}/>
+                    <label htmlFor={name}>
+                         {name}
+                    </label>
+            </div>
+              ))}
+          </label>
         </div>
-         
-         
+        <div>
+        <label>
+             <h4>Välj dressing</h4>
+             <select value= {this.state.foundation.value} onChange={this.handleInputChange}>
+                {dressings.map(name => (
+                <option key={name}>{name}</option>
+                ))}
+             </select>
+         </label>
+        </div>
+        </div>         
          <input type="submit" value="Submit"/>
      </form>
 
