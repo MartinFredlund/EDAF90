@@ -16,6 +16,9 @@ class ComposeSalad extends React.Component {
         this.setState({[event.target.name]: event.target.value});
         console.log(event.target.value);
     }
+    handleCheckboxes(event) {
+      
+    }
     handleSubmit(event) {
     alert('value: ' + this.stateFoundation.value);
     event.preventDefault();
