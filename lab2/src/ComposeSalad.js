@@ -1,6 +1,7 @@
-import React from "react";
+import React, {Component} from 'react';
+import Salad from './Salad';
 
-class ComposeSalad extends React.Component {
+class ComposeSalad extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -12,6 +13,7 @@ class ComposeSalad extends React.Component {
 
         this.handleSelect = this.handleSelect.bind(this);
         this.handleCheckboxes = this.handleCheckboxes.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleSelect(event){
         this.setState({[event.target.name]: event.target.value});
@@ -25,10 +27,28 @@ class ComposeSalad extends React.Component {
         })
     });
   }
+ /*  resetForm(){
+    this.setState({
+      foundation: '',
+      protein: [],
+      extra: [],
+      dressing: ''});
+    } */
+  
 
     handleSubmit(event) {
-    alert('value: ' + this.stateFoundation.value);
-    event.preventDefault();
+      event.preventDefault();
+        let salad = new Salad();
+        console.log(this.state);
+        salad.addFoundation(this.state.foundation);
+        salad.addDressing(this.state.dressing);
+        Object.values(this.state.protein).forEach(protein=>(
+          salad.addProtein(protein)));
+        Object.values(this.state.extra).forEach(extra =>(
+          salad.addExtra(extra)));
+        salad.setPrice();
+        this.props.updateSalad(salad); 
+        //this.resetForm();
     }
 
   render() {
