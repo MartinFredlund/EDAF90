@@ -2,7 +2,13 @@ import React from "react";
 import ComposeSalad from "./ComposeSalad";
 
 class ComposeSaladModal extends React.Component {
-
+  constructor(props){
+    super(props);
+    this.updateSalad = this.updateSalad.bind(this);
+    }
+    updateSalad(e){
+      this.props.updateSalad(e);
+    }
   render() {
     return (
       <div>
@@ -38,7 +44,7 @@ class ComposeSaladModal extends React.Component {
                 </button>
               </div>
               <div className="modal-body">
-                <ComposeSalad inventory={this.props.inventory} />
+                <ComposeSalad inventory={this.props.inventory}updateSalad={this.updateSalad} />
               </div>
               <div className="modal-footer">
                 <button
