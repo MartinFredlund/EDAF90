@@ -5,7 +5,7 @@ class ComposeSalad extends React.Component {
         super(props);
         this.state = {
           foundation: '',
-          protien: [],
+          protein: [],
           extra: [],
           dressing: ''
         };
@@ -59,7 +59,7 @@ class ComposeSalad extends React.Component {
              <h4>Välj protien</h4>  
                 {protiens.map(name => (
                 <div> 
-                    <input  type="checkbox" id={name} name={name} value={name} onChange={this.handleInputChange}/>
+                    <input type="checkbox" id={name} name="protein" value={name} checked={this.state.proteins.includes(name) || false} onChange={this.handleCheckboxes}/>
                         <label htmlFor={name}>{name} + {this.props.inventory[name].price}</label>
                 </div>
                 ))}
@@ -69,7 +69,7 @@ class ComposeSalad extends React.Component {
             <h4>Välj extra</h4>
               {extras.map(name => (
                 <div>
-                <input  type="checkbox" id={name} name={name} value={name} onChange={this.handleInputChange}/>
+                <input type="checkbox" id={name} name="extra" value={name} checked={this.state.extras.includes(name) || false} onChange={this.handleCheckboxes}/>
                     <label htmlFor={name}>{name} + {this.props.inventory[name].price}</label>
             </div>
               ))}
