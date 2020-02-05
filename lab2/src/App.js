@@ -7,13 +7,14 @@ import ComposeSaladModal from './ComposeSaladModal';
 class App extends React.Component {
   constructor(props){
   super(props);
-  this.state = {
-    sallad: []
-  };
+  this.state = ({
+    salad: []
+  });
   this.updateSalad = this.updateSalad.bind(this);
 }
 updateSalad(e){
-
+  this.setState({salad : [...this.state.salad, e]})
+  console.log(this.state);
 }
 
 render(){
