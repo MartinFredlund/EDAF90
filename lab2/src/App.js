@@ -12,13 +12,13 @@ class App extends React.Component {
   });
   this.updateSalad = this.updateSalad.bind(this);
 }
-updateSalad(e){
-  this.setState({salad : [...this.state.salad, e]})
-  console.log(this.state);
-}
+  updateSalad(e){
+    this.setState({salad : [...this.state.salad, e]})
+    console.log(this.state);
+  }
 
 render(){
-  const compoiseSaladElem = (params) => <ComposeSaladModal {...params} inventory={inventory} updateSalad={this.updateSalad}/>
+  //const ComposeSaladModales = (params) => <ComposeSaladModal {...params} inventory={inventory} updateSalad={this.updateSalad}/>
  // const viewOrderElem = (params) => <viewOrder {...params} order={this.state.order}/>
   return (
     <div>
@@ -30,7 +30,7 @@ render(){
         <p></p>
       </div>
 
-      <ComposeSaladModal inventory={inventory} />
+      <ComposeSaladModal inventory={inventory} updateSalad={this.updateSalad} />
     </div>
   );
 }
