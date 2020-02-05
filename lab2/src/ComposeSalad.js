@@ -11,14 +11,19 @@ class ComposeSalad extends React.Component {
         };
 
         this.handleSelect = this.handleSelect.bind(this);
+        this.handleCheckboxes = this.handleCheckboxes.bind(this);
     }
     handleSelect(event){
         this.setState({[event.target.name]: event.target.value});
         console.log(event.target.value);
     }
     handleCheckboxes(event) {
-      
-    }
+      event.target.checked ?
+      this.setState({[event.target.name] : [...this.state[event.target.name], event.target.value]}) :
+      this.setState({[event.target.name] : this.state[event.target.name].filter(function(inventory){
+        return inventory !== event.target.value;
+        })
+    });
     handleSubmit(event) {
     alert('value: ' + this.stateFoundation.value);
     event.preventDefault();
