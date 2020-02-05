@@ -4,7 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import ComposeSalad from './ComposeSalad';
 
-function pp() {
+function App() {
    return (
      <div>
        <div className="jumbotron text-center">

@@ -16,10 +16,9 @@ function App() {
       <div className="jumbotron text-center">
         <h1 className="display-4">EDAF90 - Web Programming</h1>
         <p className="lead">
-          This is a template project for react + router + bootstrap.
         </p>
         <hr className="my-4" />
-        <p>This code is a good starting point for lab 2.</p>
+        <p></p>
       </div>
 
       <ComposeSaladModal inventory={inventory} />
