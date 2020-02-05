@@ -10,14 +10,11 @@ class ComposeSalad extends React.Component {
           dressing: ''
         };
 
-        this.handleChange = this.handleInputChangeFoundation.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
     }
-    handleInputChangeFoundation(event){
-        const target = target.event;
-        const value = target.value;
-        this.setState({
-            foundation: value
-        });
+    handleSelect(event){
+        this.setState({[event.target.name]: event.target.value});
+        console.log(event.target.value);
     }
     handleSubmit(event) {
     alert('value: ' + this.stateFoundation.value);
@@ -47,10 +44,11 @@ class ComposeSalad extends React.Component {
      <form onSubmit={this.handleSubmit}>
          <label>
              <h4>Välj bas</h4>
-             <select value= {this.state.foundation.value} onChange={this.handleInputChangeFoundation}>
-                {/* {foundations.map(name => (
-                <option key={name}>{name} + {this.props.inventory[name].price}</option>
-                ))} */}
+             <select value= {this.state.foundation.value} name="foundation" required onChange={this.handleSelect}>
+                <option disabled defaultValue hidden>Välj en bas</option>
+                {foundations.map(name => (
+                <option value={name} type="radio" key={name}>{name} + {this.props.inventory[name].price}</option>
+                ))}
              </select>
          </label>
          <div> 
