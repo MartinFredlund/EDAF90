@@ -3,6 +3,7 @@ import'./App.css';
 //import viewOrder from './ViewOrder';
 import inventory from './inventory.ES6';
 import ComposeSaladModal from './ComposeSaladModal';
+import Orders from "./Orders";
 
 class App extends React.Component {
   constructor(props){
@@ -31,7 +32,9 @@ render(){
       </div>
 
       <ComposeSaladModal inventory={inventory} updateSalad={this.updateSalad} />
+      <Orders order = {this.state.salad} />
     </div>
+
   );
 }
 }

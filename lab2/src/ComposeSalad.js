@@ -27,13 +27,13 @@ class ComposeSalad extends Component {
         })
     });
   }
- /*  resetForm(){
+  resetForm(){
     this.setState({
       foundation: '',
       protein: [],
       extra: [],
       dressing: ''});
-    } */
+  }
   
 
     handleSubmit(event) {
@@ -48,7 +48,7 @@ class ComposeSalad extends Component {
           salad.addExtra(extra)));
         salad.setPrice();
         this.props.updateSalad(salad); 
-        //this.resetForm();
+        this.resetForm();
     }
 
   render() {
