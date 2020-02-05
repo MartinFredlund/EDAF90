@@ -78,9 +78,10 @@ class ComposeSalad extends React.Component {
         <div>
         <label>
              <h4>Välj dressing</h4>
-             <select value= {this.state.foundation.value} onChange={this.handleInputChange}>
+             <select value= {this.state.foundation.value} name="dressing" required onChange={this.handleSelect}>
+                <option disabled defaultValue hidden>Välj en dressing</option>
                 {dressings.map(name => (
-                <option key={name}>{name} + {this.props.inventory[name].price}</option>
+                <option value={name} type="radio" key={name}>{name} + {this.props.inventory[name].price}</option>
                 ))}
              </select>
          </label>
