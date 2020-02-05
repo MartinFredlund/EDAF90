@@ -1,21 +1,38 @@
+import React from 'react';
+import'./App.css';
+//import viewOrder from './ViewOrder';
 import inventory from './inventory.ES6';
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import ComposeSalad from './ComposeSalad';
+import ComposeSaladModal from './ComposeSaladModal';
 
-function App() {
-   return (
-     <div>
-       <div className="jumbotron text-center">
-         <h1>My Own Salad Bar</h1>
-         <p>Here you can order custom made salads!</p> 
-        </div>
-       <div>
-        <ComposeSalad inventory={inventory}/>
-     </div>
-   </div>
-   );
+class App extends React.Component {
+  constructor(props){
+  super(props);
+  this.state = {
+    sallad: []
+  };
+  this.updateSalad = this.updateSalad.bind(this);
+}
+updateSalad(e){
+
+}
+
+render(){
+  const compoiseSaladElem = (params) => <ComposeSaladModal {...params} inventory={inventory} updateSalad={this.updateSalad}/>
+ // const viewOrderElem = (params) => <viewOrder {...params} order={this.state.order}/>
+  return (
+    <div>
+      <div className="jumbotron text-center">
+        <h1 className="display-4">EDAF90 - Web Programming</h1>
+        <p className="lead">
+        </p>
+        <hr className="my-4" />
+        <p></p>
+      </div>
+
+      <ComposeSaladModal inventory={inventory} />
+    </div>
+  );
+}
 }
 
 

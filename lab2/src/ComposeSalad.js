@@ -41,7 +41,7 @@ class ComposeSalad extends React.Component {
     let foundations = Object.keys(inventory).filter(
       name => inventory[name].foundation
     );
-    let protiens = Object.keys(inventory).filter(
+    let proteins = Object.keys(inventory).filter(
         name => inventory[name].protein
         );
     let extras = Object.keys(inventory).filter(
@@ -63,8 +63,8 @@ class ComposeSalad extends React.Component {
          </label>
          <div> 
           <label>
-             <h4>Välj protien</h4>  
-                {protiens.map(name => (
+             <h4>Välj protein</h4>  
+                {proteins.map(name => (
                 <div> 
                     <input type="checkbox" id={name} name="protein" value={name} checked={this.state.protein.includes(name) || false} onChange={this.handleCheckboxes}/>
                         <label htmlFor={name}>{name} + {this.props.inventory[name].price}</label>
