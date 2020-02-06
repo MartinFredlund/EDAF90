@@ -1,16 +1,20 @@
 import React from 'react';
 
-class Orders {
-    constructor(order) {
-        this.order = order;
+class Orders extends React.Component {
+    constructor(props) {
+        super(props);
+        //console.log("Hej:" + this.props.order);
     }
 
     render() {
+        //console.log("Hej:" + this.props.order);
         return (
         <div className="container">
-          <h4>Välj bas</h4>
+          <h4>Order</h4>
           <ul>
-            hej
+            {this.props.order.map(name => (
+                <li key={name.id}>{name.toString()}</li>
+            ))}
           </ul>
         </div>
         );

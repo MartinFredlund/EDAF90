@@ -4,18 +4,25 @@ import'./App.css';
 import inventory from './inventory.ES6';
 import ComposeSaladModal from './ComposeSaladModal';
 import Orders from "./Orders";
+import Salad from './Salad';
+
 
 class App extends React.Component {
   constructor(props){
   super(props);
   this.state = ({
-    salad: []
+    order: []
   });
   this.updateSalad = this.updateSalad.bind(this);
 }
-  updateSalad(e){
-    this.setState({salad : [...this.state.salad, e]})
-    console.log(this.state);
+  updateSalad(order){
+    console.log(this.state.order); 
+    this.setState({order : [...this.state.order, order]});
+    console.log(this.state.order); 
+  }
+
+  get salads() {
+    return this.state.salad;
   }
 
 render(){
@@ -32,7 +39,7 @@ render(){
       </div>
 
       <ComposeSaladModal inventory={inventory} updateSalad={this.updateSalad} />
-      <Orders order = {this.state.salad} />
+      <Orders order = {this.state.order} />
     </div>
 
   );

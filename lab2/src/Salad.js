@@ -67,5 +67,13 @@ class Salad {
         this.price = prices.reduce(reducer);
     }
     
+    toString() {
+        return "Salad: " + this.id + 
+        ": Foundation: " + this.foundations + 
+        ", Proteins: " + this.proteins + 
+        ", Extras: " + this.extras + 
+        ", Dressing: " + this.dressings + 
+        ", Price: " + this.price;
+    }
 }
 export default Salad;

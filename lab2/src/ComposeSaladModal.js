@@ -6,8 +6,10 @@ class ComposeSaladModal extends React.Component {
     super(props);
     this.updateSalad = this.updateSalad.bind(this);
     }
-    updateSalad(e){
-      this.props.updateSalad(e);
+    updateSalad(salad){
+      console.log("2: " + salad);
+      this.props.updateSalad(salad);
+
     }
   render() {
     return (
