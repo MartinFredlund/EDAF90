@@ -130,4 +130,4 @@ export default ComposeSalad;
             <li key={name}>{name}</li>
           ))}
         </ul>
-      </div> */}
+    </div> */}
