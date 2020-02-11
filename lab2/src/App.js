@@ -1,20 +1,18 @@
 import React from 'react';
-import'./App.css';
-//import viewOrder from './ViewOrder';
 import inventory from './inventory.ES6';
-import ComposeSaladModal from './ComposeSaladModal';
 import Orders from "./Orders";
-import Salad from './Salad';
-
+import ComposeSalad from './ComposeSalad';
+import'./App.css';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class App extends React.Component {
   constructor(props){
-  super(props);
-  this.state = ({
-    order: []
-  });
-  this.updateSalad = this.updateSalad.bind(this);
-}
+    super(props);
+    this.state = ({
+      order: []
+    });
+    this.updateSalad = this.updateSalad.bind(this);
+  }
   updateSalad(order){
     console.log(this.state.order); 
     this.setState({order : [...this.state.order, order]});
@@ -25,26 +23,37 @@ class App extends React.Component {
     return this.state.salad;
   }
 
-render(){
-  //const ComposeSaladModales = (params) => <ComposeSaladModal {...params} inventory={inventory} updateSalad={this.updateSalad}/>
- // const viewOrderElem = (params) => <viewOrder {...params} order={this.state.order}/>
-  return (
-    <div>
-      <div className="jumbotron text-center">
-        <h1 className="display-4">EDAF90 - Web Programming</h1>
-        <p className="lead">
-        </p>
-        <hr className="my-4" />
-        <p></p>
+  render(){
+    const composeSaladElem = (params) => <ComposeSalad {...params} inventory={inventory}updateSalad={this.updateSalad} />;
+    const OrderElem = (params) => <Orders {...params} order={this.state.order}/>;
+    
+    return (
+      <div>
+        <div className="jumbotron text-center">
+          <h1 className="display-4">EDAF90 - Web Programming</h1>
+          <p className="lead">
+          </p>
+          <hr className="my-4" />
+          <p></p>
+        </div>
+        
+        <Router>
+          <div>
+            <ul className="nav nav-pills">
+              <li className="nav-item">
+                <Link className="nav-link" to='/ComposeSalad'>Komponera din egen sallad</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to='/Orders'>Order</Link>
+              </li>
+            </ul>
+            <Route path='/ComposeSalad' render={composeSaladElem}/>
+            <Route path='/Orders' render={OrderElem}/>
+          </div>
+        </Router>
       </div>
-
-      <ComposeSaladModal inventory={inventory} updateSalad={this.updateSalad} />
-      <Orders order = {this.state.order} />
-    </div>
-
-  );
+    );
+  }
 }
-}
-
 
 export default App;

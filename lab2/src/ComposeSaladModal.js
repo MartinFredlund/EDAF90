@@ -1,6 +1,7 @@
 import React from "react";
 import ComposeSalad from "./ComposeSalad";
 
+
 class ComposeSaladModal extends React.Component {
   constructor(props){
     super(props);
@@ -9,7 +10,7 @@ class ComposeSaladModal extends React.Component {
     updateSalad(salad){
       console.log("2: " + salad);
       this.props.updateSalad(salad);
-
+      this.props.history.push('/Orders');
     }
   render() {
     return (
