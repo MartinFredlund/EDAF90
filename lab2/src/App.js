@@ -14,9 +14,7 @@ class App extends React.Component {
     this.updateSalad = this.updateSalad.bind(this);
   }
   updateSalad(order){
-    console.log(this.state.order); 
     this.setState({order : [...this.state.order, order]});
-    console.log(this.state.order); 
   }
 
   get salads() {
@@ -41,14 +39,14 @@ class App extends React.Component {
           <div>
             <ul className="nav nav-pills">
               <li className="nav-item">
-                <Link className="nav-link" to='/ComposeSalad'>Komponera din egen sallad</Link>
+                <Link className="nav-link" to='/compose-salad'>Komponera din egen sallad</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to='/Orders'>Order</Link>
+                <Link className="nav-link" to='/orders'>Order</Link>
               </li>
             </ul>
-            <Route path='/ComposeSalad' render={composeSaladElem}/>
-            <Route path='/Orders' render={OrderElem}/>
+            <Route path='/compose-salad' render={composeSaladElem}/>
+            <Route path='/orders' render={OrderElem}/>
           </div>
         </Router>
       </div>

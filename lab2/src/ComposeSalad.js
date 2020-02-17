@@ -18,7 +18,6 @@ class ComposeSalad extends Component {
     handleSelect(event){
       event.target.parentElement.classList.add("was-validated");
       this.setState({[event.target.name]: event.target.value});
-      console.log(event.target.value);
     }
     handleCheckboxes(event) {
       event.target.parentElement.classList.add("was-validated");
@@ -43,7 +42,6 @@ class ComposeSalad extends Component {
     event.target.classList.add("was-validated");
     if(event.target.checkValidity() === true) { 
       let salad = new Salad();
-      console.log(this.state);
       salad.addFoundation(this.state.foundation);
       salad.addDressing(this.state.dressing);
       Object.values(this.state.protein).forEach(protein=>(
@@ -53,14 +51,14 @@ class ComposeSalad extends Component {
       salad.setPrice();
       this.props.updateSalad(salad); 
       this.resetForm();
-      this.props.history.push('/Orders');
+      this.props.history.push('/orders');
     }
   }
 
   render() {
     console.log(this.state);
     const inventory = this.props.inventory;
-    // test for correct ussage, <the parent must send this datastructure
+    
     if (!inventory) {
       alert("inventory is undefined in ComposeSalad");
     }
