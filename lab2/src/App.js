@@ -1,5 +1,5 @@
 import React from 'react';
-import inventory from './inventory.ES6';
+//import inventory from './inventory.ES6';
 import Orders from "./Orders";
 import ComposeSalad from './ComposeSalad';
 import'./App.css';
@@ -9,7 +9,8 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = ({
-      order: []
+      order: [],
+      inventory: {}
     });
     this.updateSalad = this.updateSalad.bind(this);
   }
@@ -22,7 +23,7 @@ class App extends React.Component {
   }
 
   render(){
-    const composeSaladElem = (params) => <ComposeSalad {...params} inventory={inventory}updateSalad={this.updateSalad} />;
+    const composeSaladElem = (params) => <ComposeSalad {...params} inventory={this.state.inventory}updateSalad={this.updateSalad} />;
     const OrderElem = (params) => <Orders {...params} order={this.state.order}/>;
     
     return (

@@ -1,4 +1,4 @@
-import inventory from "./inventory.ES6";
+//import inventory from "./inventory.ES6";
 
 class Salad {
     static globalid = 1;
