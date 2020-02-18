@@ -18,6 +18,14 @@ class App extends React.Component {
   
   updateSalad(order){
     this.setState({order : [...this.state.order, order]});
+    let options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(order)
+    };
+    fetch('http://localhost:8080/orders/', options);
   }
 
   get salads() {

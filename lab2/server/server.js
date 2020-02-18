@@ -40,6 +40,7 @@ var HttpStatus = require('http-status-codes');
       order: req.body
     };
     res.json(order);
+    console.log(req.body);
   }
 
   function getList(req, res, next, kind) {
