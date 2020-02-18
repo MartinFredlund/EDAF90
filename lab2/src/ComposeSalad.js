@@ -8,7 +8,8 @@ class ComposeSalad extends Component {
           foundation: '',
           protein: [],
           extra: [],
-          dressing: ''
+          dressing: '',
+          price: 0,
         };
 
         this.handleSelect = this.handleSelect.bind(this);
@@ -17,12 +18,14 @@ class ComposeSalad extends Component {
     }
     handleSelect(event){
       event.target.parentElement.classList.add("was-validated");
-      this.setState({[event.target.name]: event.target.value});
+      this.setState({[event.target.name]: event.target.value,
+      price: Number(this.state.price) + Number(this.props.inventory[event.target.value].price)});
     }
     handleCheckboxes(event) {
       event.target.parentElement.classList.add("was-validated");
       event.target.checked ?
-      this.setState({[event.target.name] : [...this.state[event.target.name], event.target.value]}) :
+      this.setState({[event.target.name] : [...this.state[event.target.name], event.target.value], price: Number(this.state.price) + Number(this.props.inventory[event.target.value].price),
+      }) :
       this.setState({[event.target.name] : this.state[event.target.name].filter(function(inventory){
         return inventory !== event.target.value;
         })
@@ -48,7 +51,7 @@ class ComposeSalad extends Component {
         salad.addProtein(protein)));
       Object.values(this.state.extra).forEach(extra =>(
         salad.addExtra(extra)));
-      salad.setPrice();
+      salad.setPrice(this.state.price);
       this.props.updateSalad(salad); 
       this.resetForm();
       this.props.history.push('/orders');
@@ -56,9 +59,9 @@ class ComposeSalad extends Component {
   }
 
   render() {
-    console.log(this.state);
-    const inventory = this.props.inventory;
     
+    const inventory = this.props.inventory;
+    console.log(inventory);
     if (!inventory) {
       alert("inventory is undefined in ComposeSalad");
     }
@@ -67,13 +70,14 @@ class ComposeSalad extends Component {
     );
     let proteins = Object.keys(inventory).filter(
         name => inventory[name].protein
-        );
+    );
     let extras = Object.keys(inventory).filter(
         name => inventory[name].extra
         );
     let dressings = Object.keys(inventory).filter(
         name => inventory[name].dressing
         );
+        console.log(dressings);
     return (
       <form onSubmit={this.handleSubmit} noValidate>
         <div className="form-group">

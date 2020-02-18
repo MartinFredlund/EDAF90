@@ -10,11 +10,10 @@ class App extends React.Component {
     super(props);
     this.state = ({
       order: [],
-      inventory: {gröt: {foundation: true}}
+      inventory: {}
     });
     this.updateSalad = this.updateSalad.bind(this);
-    this.fetchInventory = this.fetchInventory.bind(this);
-    this.fetchInventory();
+    //this.fetchInventory = this.fetchInventory.bind(this);
   }
   
   updateSalad(order){
@@ -25,32 +24,42 @@ class App extends React.Component {
     return this.state.salad;
   }
 
-  fetchInventory() {
-    let baseURL = "http://localhost:8080";
+  componentDidMount() {
+    let inventory = {};
+   
+    let baseURL = 'http://localhost:8080/';
 
-    let typeURL = [foundations, proteins, extras, dressings];
+    let typeURLS = ['foundations', 'proteins', 'extras', 'dressings'];
 
-    Promise.all(typeURL) 
-      .then(typeURL.)
-      .then(response => response.json())
-      .then(
-        Object.keys(response).forEach(
-          ingredient => this.state.inventory.ingredient = Object.values(response).forEach(
+    Promise.all(typeURLS.map(typeURL =>{ 
+      return fetch(baseURL + typeURL)
+        .then(response => response.json())
+        .then(ingredients =>{
+         return Promise.all(ingredients.map(ingredient =>{
+           return fetch(baseURL + typeURL + '/' + ingredient)
+             .then(response => response.json())
+             .then(contents => inventory[ingredient] = contents)
+        }))
+      })
+    }))
+      .then(() => this.setState({inventory}));
+      console.log(inventory);
+    }
+          /*ingredient => this.state.inventory.ingredient = Object.values(response).forEach(
             foundation => response[foundation]))
-        
+            */
         // let foundations = Object.keys(inventory).filter(
         //   name => inventory[name].foundation
         // )
         //)
-      .then(() => this.setState({ inventory }));
+      //.then(() => this.setState({ inventory }));
       
 
       //console.log("Foundations: " + foundations);
       //Object.values(this.state.protein).forEach(protein=>(salad.addProtein(protein)));
-  }
 
   render(){
-    const composeSaladElem = (params) => <ComposeSalad {...params} inventory={this.state.inventory}updateSalad={this.updateSalad} />;
+    const composeSaladElem = (params) => <ComposeSalad {...params} inventory={this.state.inventory}/>;
     const OrderElem = (params) => <Orders {...params} order={this.state.order}/>;
     
     return (
