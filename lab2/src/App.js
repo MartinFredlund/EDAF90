@@ -26,26 +26,23 @@ class App extends React.Component {
   }
 
   fetchInventory() {
-    let baseURL = "https://localhost:8080";
+    let baseURL = "http://localhost:8080";
 
-    let foundationsURL = new URL("foundations", baseURL);
-    let proteinsURL = new URL('proteins', baseURL);
-    let extrasURL = new URL('extras', baseURL);
-    let dressingURL = new URL('dressings', baseURL);
+    let typeURL = [foundations, proteins, extras, dressings];
 
-    fetch(foundationsURL)
-      .then(response => response.json());
-      //.then(
-
-        // Object.keys(response).forEach(
-        //   ingredient => this.state.inventory.ingredient = Object.values(response).forEach(
-        //     foundation => response[foundation]))
+    Promise.all(typeURL) 
+      .then(typeURL.)
+      .then(response => response.json())
+      .then(
+        Object.keys(response).forEach(
+          ingredient => this.state.inventory.ingredient = Object.values(response).forEach(
+            foundation => response[foundation]))
         
         // let foundations = Object.keys(inventory).filter(
         //   name => inventory[name].foundation
         // )
         //)
-      // .then(data => this.setState({ data }));
+      .then(() => this.setState({ inventory }));
       
 
       //console.log("Foundations: " + foundations);
