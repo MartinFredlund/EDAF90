@@ -62,7 +62,7 @@ class Salad {
     setPrice() {
         const reducer = (accumulator, currentValue) => accumulator + currentValue;
         let newArray = this.extras.concat(this.dressings, this.proteins, this.foundations);
-        let prices = newArray.map(i => inventory[i].price);
+        let prices = newArray.map(i => this.state.inventory[i].price);
        
         this.price = prices.reduce(reducer);
     }

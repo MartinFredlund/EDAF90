@@ -10,16 +10,46 @@ class App extends React.Component {
     super(props);
     this.state = ({
       order: [],
-      inventory: {}
+      inventory: {gröt: {foundation: true}}
     });
     this.updateSalad = this.updateSalad.bind(this);
+    this.fetchInventory = this.fetchInventory.bind(this);
+    this.fetchInventory();
   }
+  
   updateSalad(order){
     this.setState({order : [...this.state.order, order]});
   }
 
   get salads() {
     return this.state.salad;
+  }
+
+  fetchInventory() {
+    let baseURL = "https://localhost:8080";
+
+    let foundationsURL = new URL("foundations", baseURL);
+    let proteinsURL = new URL('proteins', baseURL);
+    let extrasURL = new URL('extras', baseURL);
+    let dressingURL = new URL('dressings', baseURL);
+
+    fetch(foundationsURL)
+      .then(response => response.json());
+      //.then(
+
+        // Object.keys(response).forEach(
+        //   ingredient => this.state.inventory.ingredient = Object.values(response).forEach(
+        //     foundation => response[foundation]))
+        
+        // let foundations = Object.keys(inventory).filter(
+        //   name => inventory[name].foundation
+        // )
+        //)
+      // .then(data => this.setState({ data }));
+      
+
+      //console.log("Foundations: " + foundations);
+      //Object.values(this.state.protein).forEach(protein=>(salad.addProtein(protein)));
   }
 
   render(){
