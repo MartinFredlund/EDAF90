@@ -26,9 +26,9 @@ class ComposeSalad extends Component {
       event.target.checked ?
       this.setState({[event.target.name] : [...this.state[event.target.name], event.target.value], price: Number(this.state.price) + Number(this.props.inventory[event.target.value].price),
       }) :
-      this.setState({[event.target.name] : this.state[event.target.name].filter(function(inventory){
+      this.setState({[event.target.name] : this.state[event.target.name].filter(function(inventory) {
         return inventory !== event.target.value;
-        })
+        }), price: Number(this.state.price) - Number(this.props.inventory[event.target.value].price)
     });
   }
   resetForm(){

@@ -59,7 +59,7 @@ class App extends React.Component {
       //Object.values(this.state.protein).forEach(protein=>(salad.addProtein(protein)));
 
   render(){
-    const composeSaladElem = (params) => <ComposeSalad {...params} inventory={this.state.inventory}/>;
+    const composeSaladElem = (params) => <ComposeSalad {...params} inventory={this.state.inventory} updateSalad={this.updateSalad} />;
     const OrderElem = (params) => <Orders {...params} order={this.state.order}/>;
     
     return (
