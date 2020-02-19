@@ -4,6 +4,7 @@ import Orders from "./Orders";
 import ComposeSalad from './ComposeSalad';
 import'./App.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Salad from './Salad';
 
 class App extends React.Component {
   constructor(props){
@@ -17,7 +18,9 @@ class App extends React.Component {
   }
   
   updateSalad(order){
-    this.setState({order : [...this.state.order, order]});
+    this.setState({order : [...this.state.order, order]}, () =>
+      {window.localStorage.setItem('salads', JSON.stringify(this.state.order))}
+    );
     let options = {
       method: 'POST',
       headers: {
@@ -32,7 +35,27 @@ class App extends React.Component {
     return this.state.salad;
   }
 
-  componentDidMount() {
+  componentDidMount() {//let salads = JSON.parse(Object.setPrototypeOf(window.localStorage.getItem('salads')));
+    let salads = JSON.parse(window.localStorage.getItem('salads'));
+    console.log(salads);
+    if(salads != null) {
+      // Gör om Javascript object till salad object
+      let orders = [];
+      Object.values(salads).forEach(element => {
+        let s = new Salad();
+        s.addFoundation(element.foundations);
+        s.addDressing(element.dressings);
+        Object.values(element.proteins).forEach(protein=>(
+          s.addProtein(protein)));
+        Object.values(element.extras).forEach(extra =>(
+          s.addExtra(extra)));
+        s.setPrice(element.price);
+        
+        orders.push(s);
+      });
+      this.setState({ order: orders });
+    }
+
     let inventory = {};
    
     let baseURL = 'http://localhost:8080/';
@@ -52,19 +75,8 @@ class App extends React.Component {
     }))
       .then(() => this.setState({inventory}));
       console.log(inventory);
-    }
-          /*ingredient => this.state.inventory.ingredient = Object.values(response).forEach(
-            foundation => response[foundation]))
-            */
-        // let foundations = Object.keys(inventory).filter(
-        //   name => inventory[name].foundation
-        // )
-        //)
-      //.then(() => this.setState({ inventory }));
-      
 
-      //console.log("Foundations: " + foundations);
-      //Object.values(this.state.protein).forEach(protein=>(salad.addProtein(protein)));
+    }
 
   render(){
     const composeSaladElem = (params) => <ComposeSalad {...params} inventory={this.state.inventory} updateSalad={this.updateSalad} />;
